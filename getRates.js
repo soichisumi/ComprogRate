@@ -1,6 +1,5 @@
 let chr = require("cheerio-httpcli")
 
-
 function getAtcoderRate(userId){
     //このpromiseでthenを呼ぶとcheerioのfetchが実行される。
     //cheerioのthen, catchのどちらかでresolve, rejectが呼ばれれば終了
@@ -24,27 +23,6 @@ function getAtcoderRate(userId){
                     reject()
                 })
     })
-}
-
-function getHtmlForAtcoderRate(rate){ //rate: int
-                    //gray, brown, green, cyan, blue, yellow, orange, red 
-    let thresholds  = [400, 800, 1200, 1600, 2000, 2400, 2800, 10000]
-    let classes     = ['user-gray', 'user-brown', 'user-green', 'user-cyan',
-                        'user-blue', 'user-yellow', 'user-orange', 'user-red' ]
-    for (let i in thresholds){
-        if(rate < thresholds[i])
-            return '<div class="' + classes[i] + '">' + String(rate) + '</div>'   
-    }
-}
-
-function getHtmlForCodeforcesRate(rate){
-    let thresholds = [1200, 1400, 1600, 1900, 2200, 2400, 10000]
-    let classes = ['user-gray', 'user-green', 'user-cyan', 'user-blue',
-                    'user-violet', 'user-orange', 'user-red']
-    for (let i in thresholds){
-        if(rate < thresholds[i])
-            return '<div class="' + classes[i] + '">' + String(rate) + '</div>'   
-    }
 }
 
 function getHtmlForRate(rate /*int*/, contest /*string*/){
