@@ -63,3 +63,5 @@ function getHtmlForRate(rate /*int*/, contest /*string*/){
 
 //getAtcoderRate("yoyoyousei").then(function(res){console.log(res)
 //console.log(getHtmlForRate(res.now,"atcoder"))})
+// getCodeforcesRate('yousei').then(function(res){console.log(res)
+// console.log(getHtmlForRate(res.result[res.result.length-1].newRating))})
