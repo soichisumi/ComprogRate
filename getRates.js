@@ -32,17 +32,19 @@ function getHtmlForAtcoderRate(rate){ //rate: int
     let classes     = ['user-gray', 'user-brown', 'user-green', 'user-cyan',
                         'user-blue', 'user-yellow', 'user-orange', 'user-red' ]
     for (let i in thresholds){
-        if(rate < thresholds[i]){
-            return '<div class="' + classes[i] + '">' 
-                                + String(rate) + '</div>'
-        }
+        if(rate < thresholds[i])
+            return '<div class="' + classes[i] + '">' + String(rate) + '</div>'   
     }
 }
 
 function getHtmlForCodeforcesRate(rate){
-    let thresholds = [1200, 1400, 1600, 1900, 2300, 10000]
+    let thresholds = [1200, 1400, 1600, 1900, 2200, 2400, 10000]
     let classes = ['user-gray', 'user-green', 'user-cyan', 'user-blue',
                     'user-violet', 'user-orange', 'user-red']
+    for (let i in thresholds){
+        if(rate < thresholds[i])
+            return '<div class="' + classes[i] + '">' + String(rate) + '</div>'   
+    }
 }
 
 
