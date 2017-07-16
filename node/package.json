@@ -4,9 +4,10 @@
   "description": "",
   "main": "getRates.js",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
+    "cheerio-httpcli": "^0.7.0",
     "request": "^2.81.0",
-    "request-promise": "^4.2.1"
+    "request-promise": "^4.2.1",
+    "try-thread-sleep": "^1.0.2"
   },
   "devDependencies": {},
   "scripts": {

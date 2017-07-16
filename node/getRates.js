@@ -83,11 +83,11 @@ function getHtmlForRate(rate /*int*/, contest /*string*/){
     }
 }
 
-getAtcoderRate("yoyoyousei").then(function(res){console.log(res)
-console.log(getHtmlForRate(res.now, "atcoder"))})
+// getAtcoderRate("yoyoyousei").then(function(res){console.log(res)
+// console.log(getHtmlForRate(res.now, "atcoder"))})
 
-getCodeforcesRate('yousei').then(function(res){console.log(res)
-console.log(getHtmlForRate(res.now, "codeforces"))})
+// getCodeforcesRate('yousei').then(function(res){console.log(res)
+// console.log(getHtmlForRate(res.now, "codeforces"))})
 
-getTopcoderRate('camshift').then(function(res){console.log(res)
-console.log(getHtmlForRate(res.now, "topcoder"))})
+// getTopcoderRate('camshift').then(function(res){console.log(res)
+// console.log(getHtmlForRate(res.now, "topcoder"))})
