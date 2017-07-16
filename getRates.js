@@ -1,14 +1,13 @@
 let rp =require("request-promise")
 let chr = require("cheerio-httpcli") //jqueryに似た書き方でdom取得ができる
 
-
 function getAtcoderRate(userId){
     //このpromiseでthenを呼ぶとcheerioのfetchが実行される。
     //cheerioのthen, catchのどちらかでresolve, rejectが呼ばれれば終了
     return new Promise(function(resolve, reject){
             console.log("in function.")
 
-            chr.fetch('https://atcoder.jp/user/' + userId)
+            chr.fetch('https://atcoder.jp/user/' + userId) //scrape
                 .then(function(res){
                     let $ = res.$;
                     let nowRate = parseInt( $('dd').eq(5).text()) 
@@ -34,7 +33,15 @@ function getCodeforcesRate(userId){
         uri: 'http://codeforces.com/api/user.rating',
         qs:{
             'handle': userId}
-        });
+        })
+}
+
+function getTopcoderRate(userId){
+    return rp({
+        method:'GET',
+        json: true,
+        uri: 'http://api.topcoder.com/v2/users/' + userId + '/statistics/data/srm'
+    })
 }
 
 function getHtmlForRate(rate /*int*/, contest /*string*/){
@@ -65,3 +72,5 @@ function getHtmlForRate(rate /*int*/, contest /*string*/){
 //console.log(getHtmlForRate(res.now,"atcoder"))})
 // getCodeforcesRate('yousei').then(function(res){console.log(res)
 // console.log(getHtmlForRate(res.result[res.result.length-1].newRating))})
+getTopcoderRate('camshift').then(function(res){console.log(res)
+console.log(getHtmlForRate(res.rating))})
