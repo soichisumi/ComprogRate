@@ -5,15 +5,11 @@ function getAtcoderRate(userId){
     //このpromiseでthenを呼ぶとcheerioのfetchが実行される。
     //cheerioのthen, catchのどちらかでresolve, rejectが呼ばれれば終了
     return new Promise(function(resolve, reject){
-            console.log("in function.")
-
             chr.fetch('https://atcoder.jp/user/' + userId) //scrape
                 .then(function(res){
                     let $ = res.$;
                     let nowRate = parseInt( $('dd').eq(5).text()) 
                     let maxRate = parseInt( $('dd').eq(6).text())
-                    console.log(nowRate)
-                    console.log(maxRate)
                     resolve({now:nowRate, max: maxRate});
                 })
                 .catch(function(err){
@@ -25,15 +21,18 @@ function getAtcoderRate(userId){
 
 function getCodeforcesRate(userId){
     return rp({
-            method:'GET',
-            json: true,
-            uri: 'http://codeforces.com/api/user.info',
-            qs:{
-                'handles': userId
+                method:'GET',
+                json: true,
+                uri: 'http://codeforces.com/api/user.info',
+                qs:{
+                    'handles': userId
             }
-        }).then(function(res){ 
-            return new Promise(function(resolve, reject){
-                resolve({now: parseInt(res.result[0].rating), max: parseInt(res.result[0].maxRating)}) 
+            }).then(function(res){ 
+                return new Promise(function(resolve, reject){
+                    resolve({now: parseInt(res.result[0].rating), max: parseInt(res.result[0].maxRating)}) 
+            }).catch(function(err){
+                console.log(err);
+                reject()
             })
         })
 }
@@ -47,6 +46,9 @@ function getTopcoderRate(userId){
             return new Promise(function(resolve, reject){
                 resolve({now: parseInt(res.rating), max: parseInt(res.maximumRating)}) 
             })
+        }).catch(function(err){
+            console.log(err);
+            reject()
         })
 }
 
