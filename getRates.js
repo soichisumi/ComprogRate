@@ -14,34 +14,40 @@ function getAtcoderRate(userId){
                     let maxRate = parseInt( $('dd').eq(6).text())
                     console.log(nowRate)
                     console.log(maxRate)
-                    let ret = {}
-                    ret['now'] = nowRate
-                    ret['max'] = maxRate
-                    resolve(ret);
+                    resolve({now:nowRate, max: maxRate});
                 })
                 .catch(function(err){
                     console.log(err);
                     reject()
                 })
-    })
+        })
 }
 
 function getCodeforcesRate(userId){
     return rp({
-        method:'GET',
-        json: true,
-        uri: 'http://codeforces.com/api/user.rating',
-        qs:{
-            'handle': userId}
+            method:'GET',
+            json: true,
+            uri: 'http://codeforces.com/api/user.info',
+            qs:{
+                'handle': userId
+            }
+        }).then(function(res){ 
+            return new Promise(function(resolve, reject){
+                resolve({now: parseInt(res.rating), max: parseInt(res.maxRating)}) 
+            })
         })
 }
 
 function getTopcoderRate(userId){
     return rp({
-        method:'GET',
-        json: true,
-        uri: 'http://api.topcoder.com/v2/users/' + userId + '/statistics/data/srm'
-    })
+            method:'GET',
+            json: true,
+            uri: 'http://api.topcoder.com/v2/users/' + userId + '/statistics/data/srm'
+        }).then(function(res){ 
+            return new Promise(function(resolve, reject){
+                resolve({now: parseInt(res.rating), max: parseInt(maximumRating)}) 
+            })
+        })
 }
 
 function getHtmlForRate(rate /*int*/, contest /*string*/){
@@ -70,7 +76,9 @@ function getHtmlForRate(rate /*int*/, contest /*string*/){
 
 //getAtcoderRate("yoyoyousei").then(function(res){console.log(res)
 //console.log(getHtmlForRate(res.now,"atcoder"))})
+
 // getCodeforcesRate('yousei').then(function(res){console.log(res)
 // console.log(getHtmlForRate(res.result[res.result.length-1].newRating))})
-getTopcoderRate('camshift').then(function(res){console.log(res)
-console.log(getHtmlForRate(res.rating))})
+
+// getTopcoderRate('camshift').then(function(res){console.log(res)
+// console.log(getHtmlForRate(res.rating))})
