@@ -10,8 +10,8 @@ function getAtcoderRate(userId){
             chr.fetch('https://atcoder.jp/user/' + userId)
                 .then(function(res){
                     let $ = res.$;
-                    let nowRate = $('dd').eq(5).text()
-                    let maxRate = $('dd').eq(6).text()
+                    let nowRate = parseInt( $('dd').eq(5).text())
+                    let maxRate = parseInt( $('dd').eq(6).text())
                     console.log(nowRate)
                     console.log(maxRate)
                     let ret = {}
@@ -24,6 +24,25 @@ function getAtcoderRate(userId){
                     reject()
                 })
     })
+}
+
+function getHtmlForAtcoderRate(rate){ //rate: int
+                    //gray, brown, green, cyan, blue, yellow, orange, red 
+    let thresholds  = [400, 800, 1200, 1600, 2000, 2400, 2800, 10000]
+    let classes     = ['user-gray', 'user-brown', 'user-green', 'user-cyan',
+                        'user-blue', 'user-yellow', 'user-orange', 'user-red' ]
+    for (let i in thresholds){
+        if(rate < thresholds[i]){
+            return '<div class="' + classes[i] + '">' 
+                                + String(rate) + '</div>'
+        }
+    }
+}
+
+function getHtmlForCodeforcesRate(rate){
+    let thresholds = [1200, 1400, 1600, 1900, 2300, 10000]
+    let classes = ['user-gray', 'user-green', 'user-cyan', 'user-blue',
+                    'user-violet', 'user-orange', 'user-red']
 }
 
 
