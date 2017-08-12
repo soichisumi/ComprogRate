@@ -83,11 +83,14 @@ function getHtmlForRate(rate /*int*/, contest /*string*/){
     }
 }
 
-getAtcoderRate("yoyoyousei").then(function(res){console.log(res)
-document.getElementById('atc').innerHtml(getHtmlForRate(res.now, "atcoder"))})
+window.getA = getAtcoderRate
+window.getC = getCodeforcesRate
+window.getT = getTopcoderRate
+// getAtcoderRate("yoyoyousei").then(function(res){console.log(res)
+// document.getElementById('atc').innerHtml(getHtmlForRate(res.now, "atcoder"))})
 
-getCodeforcesRate('yousei').then(function(res){console.log(res)
-document.getElementById('cdf').innerHtml(getHtmlForRate(res.now, "codeforces"))})
+// getCodeforcesRate('yousei').then(function(res){console.log(res)
+// document.getElementById('cdf').innerHtml(getHtmlForRate(res.now, "codeforces"))})
 
-getTopcoderRate('camshift').then(function(res){console.log(res)
-document.getElementById('tpc').innerHtml(getHtmlForRate(res.now, "topcoder"))})
+// getTopcoderRate('camshift').then(function(res){console.log(res)
+// document.getElementById('tpc').innerHtml(getHtmlForRate(res.now, "topcoder"))})
